@@ -6,7 +6,7 @@ Untuk membuat topologi, maka dibuat file topo.sh di UML utama dengan konfigurasi
 ## DHCP
 #### Soal 2
 Untuk membuat UML SURABAYA sebagai relay, maka perlu diinstall isc-dhcp-relay, dengan perintah:
-> apt-get install isc-dhcp-relay
+``` apt-get install isc-dhcp-relay ```
 
 Setelah selesai install, dilakukan konfigurasi di /etc/default/isc-dhcp-relay.
 Target server diatur menjadi server TUBAN, dan interface yang ditambahkan adalah semua interface yang menghubungken subnet2 ke SURABAYA, yaitu eth1, eth2, dan eth3:
@@ -14,7 +14,7 @@ Target server diatur menjadi server TUBAN, dan interface yang ditambahkan adalah
 ![alt text](images/2-1.png)
 
 Setelah dilakukan setup, operasi dipindah ke server TUBAN. Dimulai dengan menginstall isc-dhcp-server, dengan perintah:
-> apt-get install isc-dhcp-server
+``` apt-get install isc-dhcp-server ```
 
 Setelah selesai install, dilakukan konfigurasi di /etc/default/isc-dhcp-server.
 Interfaces diisi interface yang menghubungkan subnet tempat TUBAN dan relay SURABAYA.
@@ -31,18 +31,19 @@ Untuk mengatur dhcp untuk client, maka ditambahkan subnet2 client dlm /etc/dhcp/
 ![alt text](images/2-4.png)
 
 Untuk mengatur range di subnet 1, maka ditambahkan argumen berikut:
-> range 192.168.0.10 192.168.0.100;
+``` range 192.168.0.10 192.168.0.100;
 range 192.168.0.110 192.168.0.200;
+```
 
 Setelah dilakukan konfigurasi, dilakukan restart pada server TUBAN:
-> service isc-dhcp-server restart
+``` service isc-dhcp-server restart ```
 
 Setelah restart DHCP server, maka pindah ke client2 dlm subnet 1 (SIDOARJO & GRESIK) dan ganti konfigurasi /etc/network/interfaces
 Comment/Hapus iface, address, gateway, dan netmask, lalu diganti dengan line berikut:
-> iface eth0 inet dhcp
+``` iface eth0 inet dhcp ```
 
 Setelah diganti, dilakukan perintah berikut di UML Client:
-> service networking restart
+``` service networking restart ```
 
 untuk merestart networking pada Client
 
@@ -53,7 +54,7 @@ Setelah restart, dilakukan cek IP client dengan perintah ifconfig pada tiap clie
 ![alt text](images/3-2.png)
 #### Soal 4
 Untuk mengatur range di subnet 3, maka ditambahkan argumen berikut:
-> range 192.168.1.50 192.168.1.70;
+``` range 192.168.1.50 192.168.1.70; ```
 
 DHCP server restart dilakukan setelah konfigurasi seperti biasa
 
@@ -65,13 +66,13 @@ Lalu dilakukan pengecekan IP pula dengan perintah ifconfig.
 ![alt text](images/4-2.png)
 #### Soal 5
 Untuk mengatur DNS Server client, maka ditambahkan argumen berikut dlm /etc/dhcp/dhcpd.conf pada tiap subnet:
-> option domain-name-servers 10.151.79.74, 202.46.129.2;
+``` option domain-name-servers 10.151.79.74, 202.46.129.2; ```
 
 DHCP server restart dilakukan setelah konfigurasi seperti biasa
 
 Setelah restart DHCP server, langsung dilakukan networking restart dlm client.
 Setelah client restart, dapat dilakukan pengecekan pada /etc/resolv.conf pada tiap client untuk melihat apakah DNS server dikenali client, dengan perintah:
-> cat /etc/resolv.conf
+``` cat /etc/resolv.conf ```
 
 ![alt text](images/5-1.png)
 ![alt text](images/5-2.png)
@@ -80,12 +81,14 @@ Setelah client restart, dapat dilakukan pengecekan pada /etc/resolv.conf pada ti
 #### Soal 6
 Untuk mengatur batas waktu penggunaan IP untuk setiap client, maka dilakukan perintah berikut dlm /etc/dhcp/dhcpd.conf pada tiap subnet:
 - Untuk subnet 1:
-> default-lease-time 300;
+``` default-lease-time 300;
 max-lease-time 300;
+```
 
 - Untuk subnet 3:
-> default-lease-time 600;
+``` default-lease-time 600;
 max-lease-time 600;
+```
 
 Waktu berupa satuan detik.
 DHCP server restart dilakukan setelah konfigurasi seperti biasa
