@@ -31,7 +31,8 @@ Untuk mengatur dhcp untuk client, maka ditambahkan subnet2 client dlm /etc/dhcp/
 ![alt text](images/2-4.png)
 
 Untuk mengatur range di subnet 1, maka ditambahkan argumen berikut:
-``` range 192.168.0.10 192.168.0.100;
+``` 
+range 192.168.0.10 192.168.0.100;
 range 192.168.0.110 192.168.0.200;
 ```
 
