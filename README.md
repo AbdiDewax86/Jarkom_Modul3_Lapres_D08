@@ -5,8 +5,24 @@ Untuk membuat topologi, maka dibuat file topo.sh di UML utama dengan konfigurasi
 ![alt text](images/1.png)
 ## DHCP
 #### Soal 2
+Untuk membuat UML SURABAYA sebagai relay, maka perlu diinstall isc-dhcp-relay, dengan perintah:
+> apt-get install isc-dhcp-relay
+Setelah selesai install, dilakukan konfigurasi di /etc/default/isc-dhcp-relay.
+Target server diatur menjadi server TUBAN, dan interface yang ditambahkan adalah semua interface yang menghubungken subnet2 ke SURABAYA, yaitu eth1, eth2, dan eth3:
+
 ![alt text](images/2-1.png)
+
+Setelah dilakukan setup, operasi dipindah ke server TUBAN. Dimulai dengan menginstall isc-dhcp-server, dengan perintah:
+> apt-get install isc-dhcp-server
+Setelah selesai install, dilakukan konfigurasi di /etc/default/isc-dhcp-server.
+Interfaces diisi interface yang menghubungkan subnet tempat TUBAN dan relay SURABAYA.
+
 ![alt text](images/2-2.png)
+
+Setelah dilakukan setup, dilakukan konfigurasi di /etc/dhcp/dhcpd.conf
+Dlm file, ditambah subnet tempat TUBAN berada. Tidak perlu mengisi apapun.
+
+![alt text](images/2-3.png)
 #### Soal 3
 ![alt text](images/3-1.png)
 ![alt text](images/3-2.png)
