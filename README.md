@@ -103,8 +103,9 @@ Terlihat pada saat restart, client2 pada subnet 1 dan subnet 3 memiliki renewal 
 ![alt text](images/6-4.png)
 ## Proxy Server
 #### Soal 7
-![alt text](images/7-1.png)
 ![alt text](images/7-2.png)
+![alt text](images/7-1.png)
+
 #### Soal 8
 ![alt text](images/8-1.png)
 ![alt text](images/8-2.png)
