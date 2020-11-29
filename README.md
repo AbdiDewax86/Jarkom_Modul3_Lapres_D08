@@ -103,22 +103,102 @@ Terlihat pada saat restart, client2 pada subnet 1 dan subnet 3 memiliki renewal 
 ![alt text](images/6-4.png)
 ## Proxy Server
 #### Soal 7
+Untuk membuat authentikasi ketika menggunakan proxy server, kita dapat mengikuti step-step berikut
+- Install apache-utils pada UML MOJOKERTO dengan mengetikkan
+```
+apt-get install apache2-utils
+```
+- Buat User dan Password baru dengan mengetikkan
+```
+htpasswd -c /etc/squid/passwd userta_d08
+```
+```
+Ketika meminta masukkan password ketikkan inipassw0rdta_d08
+```
+- Kemudian buat konfigurasi seperti gambar di bawah ini dengan mengetikkan
+```
+nano /etc/squid/squid.conf
+```
 ![alt text](images/7-2.png)
+- Restart squidnya
+- Ubah pengaturan proxy dengan menggunakan IP MOJOKERTO dengan port 8080
+- Coba buka ```monta.if.ac.id```
+
+Hasil:
 ![alt text](images/7-1.png)
 
 #### Soal 8
+Untuk membuat pembatasan penggunaan internet untuk menerjakan TA dan waktu yang diperbolehkan hanya pada hari ```Selasa dan Rabu pukul 13:00-18:00``` dapat dilakukan dengan cara berikut ini
+- Buat file baru bernama acl.conf di folder squid
+```
+nano /etc/squid/acl.conf
+```
+- Buat configurasi seperti gambar berikut
 ![alt text](images/8-1.png)
+- Kemudian tambahkan configurasi pada squid.conf seperti gambar berikut
 ![alt text](images/8-2.png)
+
+Hasil ketika proxy digunakan dan mengakses ```monta.if.ac.id``` pada waktu yang tidak ditentukan
 ![alt text](images/8-3.png)
+Hasil ketika proxy digunakan dan mengakses ```monta.if.ac.id``` pada waktu yang ditentukan
 ![alt text](images/8-4.png)
+
 #### Soal 9
+Untuk membuat pembatasan penggunaan internet untuk waktu melakukan bimbingan dengan Bu Meguri pada waktu yang diperbolehkan hanya pada hari ```Selasa dan Kamis pukul 21:00-09:00 keesokan harinya/sampai Jumat 09:00``` dapat dilakukan dengan cara berikut ini
+- Buka file acl.conf
+```
+nano /etc/squid/acl.conf
+```
+- Tambahkan configurasi seperti gambar berikut
 ![alt text](images/9-1.png)
+- Kemudian tambahkan configurasi pada squid.conf seperti gambar berikut
 ![alt text](images/9-2.png)
+
+Hasil ketika proxy digunakan dan mengakses ```monta.if.ac.id``` pada waktu yang tidak ditentukan
+![alt text](images/8-3.png)
+Hasil ketika proxy digunakan dan mengakses ```monta.if.ac.id``` pada waktu yang ditentukan
+![alt text](images/8-4.png)
+
 #### Soal 10
-![alt text](images/10-1.png)
+Untuk membuat agar setiap mengakses google.com langsung redirect ke monta.if.ac.id dapat dilakukan dengan menambahkan konfigurasi pada ```squid.conf``` seperti gambar berikut ini
+- Buka file squid.conf dan tambahkan konfigurasi seperti gambar di bawah
+ ```
+ nano /etc/squid/squid.conf
+ ```
 ![alt text](images/10-2.png)
+
 #### Soal 11
+Untuk menggubak ```Error Page Default Squidnya``` dapat dilakukan seperti berikut
+- Masuk ke directory tempat menyimpan file error
+```
+cd /usr/share/squid/errors/en
+```
+- Rename file ERR_ACCESS_DENIED menjadi nama sesuai keinginan anda untuk menjadi backup atau bisa meremove file ERR_ACCESS_DENIEDnya
+- Download file error yang diinginkan
+```
+wget 10.151.36.202/ERR_ACCESS_DENIED
+```
+- Coba buka ```monta.if.ac.id``` dengan menggunakan proxy dan pada waktu yang tidak diperbolehkan
+HASIL
 ![alt text](images/11.png)
+
 #### Soal 12
+Untuk memebuat DNS agar dapat mengingat dan mempermudah pemakainya dapat dilakukan dengan cara seperti berikut
+- Buat konfigurasi pada named.local.conf pada UML MALANG
+```
+ nano /etc/bind/named.conf.local
+```
+- Isiskan confikurasi janganlupa-ta.d08.pw seperti gambar dibawah ini
 ![alt text](images/12-1.png)
+- Copykan file ```db.local``` pada ```/etc/bind``` kedalam folder jarkom dengan nama file janganlupa-ta.d08.pw
+- Kemudian buka file ```janganlupa-ta.d08.pw```
+```
+nano /etc/bind/jarkom/janganlupa-ta.d08.pw
+```
+- Edit konfigurasi seperti gambar berikut dengan configurasi IP MOJOKERTO
 ![alt text](images/12-2.png)
+- Restart bind9
+```
+service bind9 restart
+```
+- Ubah pengaturan proxy browser dengan menggunakan DNS yang telah kita buat yaitu janganlupa-ta.d08.pw dengan port 8080 dan coba jalankan serta buka monta.if.ac.id
