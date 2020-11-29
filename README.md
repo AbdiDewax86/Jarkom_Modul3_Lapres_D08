@@ -137,7 +137,10 @@ nano /etc/squid/acl.conf
 ![alt text](images/8-1.png)
 - Kemudian tambahkan configurasi pada squid.conf seperti gambar berikut
 ![alt text](images/8-2.png)
-
+- Restart squid
+```
+service squid restart
+```
 Hasil ketika proxy digunakan dan mengakses ```monta.if.ac.id``` pada waktu yang tidak ditentukan
 ![alt text](images/8-3.png)
 Hasil ketika proxy digunakan dan mengakses ```monta.if.ac.id``` pada waktu yang ditentukan
@@ -153,7 +156,10 @@ nano /etc/squid/acl.conf
 ![alt text](images/9-1.png)
 - Kemudian tambahkan configurasi pada squid.conf seperti gambar berikut
 ![alt text](images/9-2.png)
-
+- Restart squid
+```
+service squid restart
+```
 Hasil ketika proxy digunakan dan mengakses ```monta.if.ac.id``` pada waktu yang tidak ditentukan
 ![alt text](images/8-3.png)
 Hasil ketika proxy digunakan dan mengakses ```monta.if.ac.id``` pada waktu yang ditentukan
@@ -166,9 +172,12 @@ Untuk membuat agar setiap mengakses google.com langsung redirect ke monta.if.ac.
  nano /etc/squid/squid.conf
  ```
 ![alt text](images/10-2.png)
-
+- Restart squid
+```
+service squid restart
+```
 #### Soal 11
-Untuk menggubak ```Error Page Default Squidnya``` dapat dilakukan seperti berikut
+Untuk mengubah ```Error Page Default Squidnya``` dapat dilakukan seperti berikut
 - Masuk ke directory tempat menyimpan file error
 ```
 cd /usr/share/squid/errors/en
